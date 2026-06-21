@@ -7,6 +7,7 @@ source .venv/bin/activate
 
 pip install --upgrade pip
 pip install librosa numpy scipy soundfile streamlit
+pip install pretty_midi mido
 
 echo "complete"
 echo "run source .venv/bin/activate"  
