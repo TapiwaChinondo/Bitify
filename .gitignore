@@ -1,0 +1,18 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Audio files
+audio/*
+!audio/.gitkeep
+
+# Output files
+*.wav
+*.mp3
+*.flac
+
+# macOS
+.DS_Store
