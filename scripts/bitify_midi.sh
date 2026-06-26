@@ -4,7 +4,7 @@ set -e
 
 INPUT_FILE=${1:-audio/Mario.mid}
 OUTPUT_FILE=${2:-audio/output/output.wav}
-MODE=${3:-mixed}
+MODE=${3:-nes}
 
 mkdir -p "$(dirname "$OUTPUT_FILE")"
 

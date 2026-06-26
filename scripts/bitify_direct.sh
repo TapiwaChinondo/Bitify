@@ -4,7 +4,7 @@ set -e
 
 INPUT_FILE=${1:-audio/sample.mp3}
 OUTPUT_FILE=${2:-audio/output/direct_8bit.wav}
-MODE=${3:-mixed}
+MODE=${3:-nes}
 
 TEMP_DIR="audio/temp_direct"
 

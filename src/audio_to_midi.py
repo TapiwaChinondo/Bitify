@@ -29,7 +29,7 @@ predict_and_save(
     [args.input_file],
     str(output_dir),
     save_midi=True,
-    sonify_midi=False,
+    sonify_midi=True,
     save_model_outputs=False,
     save_notes=False,
     model_or_model_path=ICASSP_2022_MODEL_PATH

@@ -2,15 +2,14 @@
 
 set -e
 
-STYLE=${1:-nes}
-KEEP_FILES=${2:-false}
+STYLE=${1:-mixed}
 
 INPUT_DIR="audio"
-OUTPUT_DIR="audio/output/batch_compare"
+OUTPUT_DIR="audio/output/batch_${STYLE}"
 
 mkdir -p "$OUTPUT_DIR"
 
-echo "Batch comparing MP3 files in: $INPUT_DIR"
+echo "Batch converting MP3 files in: $INPUT_DIR"
 echo "Style: $STYLE"
 echo "Output: $OUTPUT_DIR"
 echo
@@ -27,32 +26,19 @@ do
 
     SAFE_NAME=$(echo "$SONG_NAME" | tr ' ' '_' | tr -cd '[:alnum:]_-')
 
-    DIRECT_OUTPUT="$OUTPUT_DIR/${SAFE_NAME}_direct_${STYLE}.wav"
-    DEMUCS_OUTPUT="$OUTPUT_DIR/${SAFE_NAME}_demucs_dynamic_${STYLE}.wav"
+    OUTPUT_FILE="$OUTPUT_DIR/${SAFE_NAME}_${STYLE}.wav"
 
     echo "========================================"
     echo "Processing: $BASENAME"
+    echo "Output: $OUTPUT_FILE"
     echo "========================================"
 
-    echo
-    echo "Running direct conversion..."
     scripts/bitify_direct.sh \
         "$INPUT_FILE" \
-        "$DIRECT_OUTPUT" \
+        "$OUTPUT_FILE" \
         "$STYLE"
 
-    echo
-    echo "Running Demucs dynamic conversion..."
-    scripts/bitify_demucs_dynamic.sh \
-        "$INPUT_FILE" \
-        "$DEMUCS_OUTPUT" \
-        "$STYLE" \
-        "$KEEP_FILES"
-
-    echo
-    echo "Done with: $BASENAME"
-    echo "Direct: $DIRECT_OUTPUT"
-    echo "Demucs dynamic: $DEMUCS_OUTPUT"
+    echo "Done: $OUTPUT_FILE"
     echo
 done
 
