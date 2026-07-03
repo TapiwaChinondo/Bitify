@@ -6,7 +6,7 @@ import numpy as np
 import pretty_midi
 import soundfile as sf
 
-from synth import generate_wave, midi_note_to_frequency, choose_wave_type
+from synth import generate_wave, midi_note_to_frequency, choose_wave_type, apply_envelope
 
 parser = argparse.ArgumentParser(
     description="Convert MIDI files into 8-bit WAV audio."
@@ -86,6 +86,8 @@ for instrument in midi_data.instruments:
             time_points,
             wave_type
         )
+        
+        wave = apply_envelope(wave, sample_rate)
 
         volume = note.velocity / 127
 

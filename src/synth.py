@@ -61,3 +61,19 @@ def choose_wave_type(mode):
         ])
         
     return mode
+
+# to prevent sudden cuts/static apply a fade in and fade out on every note
+# this will make the audio sound more smooth particualrly for triangle notes that have sharp peak.
+def apply_envelope(wave, sample_rate, attack_ms=3, release_ms=8):
+    attack_samples = int(sample_rate * attack_ms / 1000)
+    release_samples = int(sample_rate * release_ms / 1000)
+
+    envelope = np.ones(len(wave))
+
+    if attack_samples > 0:
+        envelope[:attack_samples] = np.linspace(0, 1, min(attack_samples, len(wave)))
+
+    if release_samples > 0:
+        envelope[-release_samples:] = np.linspace(1, 0, min(release_samples, len(wave)))
+
+    return wave * envelope
